@@ -14,6 +14,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.example.hibernate.domain.Message;
+import com.example.hibernate.entity.association.bidirectional.many_to_one.Student;
+import com.example.hibernate.entity.association.bidirectional.one_to_many.Guide;
 import com.example.hibernate.util.HibernateUtil;
 
 import jakarta.persistence.EntityManager;

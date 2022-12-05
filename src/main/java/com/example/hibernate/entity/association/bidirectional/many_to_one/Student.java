@@ -1,4 +1,6 @@
-package com.example.hibernate.entity.association;
+package com.example.hibernate.entity.association.bidirectional.many_to_one;
+
+import com.example.hibernate.entity.association.bidirectional.one_to_many.Guide;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -19,7 +21,7 @@ public class Student {
     private Long id;
     @Column(name = "NAME")
     private String name;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     @JoinColumn(name = "GUIDE_ID")
     private Guide guide;
 

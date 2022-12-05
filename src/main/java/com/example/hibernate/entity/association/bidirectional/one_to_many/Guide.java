@@ -1,7 +1,9 @@
-package com.example.hibernate.entity.association;
+package com.example.hibernate.entity.association.bidirectional.one_to_many;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import com.example.hibernate.entity.association.bidirectional.many_to_one.Student;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -21,15 +23,15 @@ public class Guide {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private Long id;
-    @Column(name = "STAFF_ID", nullable = false)
+    @Column(name = "STAFF_ID", nullable = false, unique = true)
     private String staffId;
     @Column(name = "NAME", nullable = false)
     private String name;
     @Column(name = "SALARY", nullable = false)
     private Integer salary;
     
-    //@OneToMany(mappedBy = "guide", cascade = CascadeType.PERSIST)
-    //private Set<Student> students = new HashSet<>();
+    @OneToMany(mappedBy = "guide", cascade = CascadeType.PERSIST)
+    private Set<Student> students = new HashSet<>();
 
     public Guide(){
 
@@ -73,12 +75,20 @@ public class Guide {
         this.salary = salary;
     }   
 
-    
-   
-    @Override
-    public String toString() {
-        return "Guide [id=" + id + ", staffId=" + staffId + ", name=" + name + ", salary=" + salary + "]";
+    public Set<Student> getStudents() {
+        return students;
     }
 
-    
+    public void addStudent(Student student){
+        this.students.add(student);
+        student.setGuide(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Guide [id=" + id + ", staffId=" + staffId + ", name=" + name + ", salary=" + salary + ", students="
+                + students + "]";
+    }
+
+        
 }

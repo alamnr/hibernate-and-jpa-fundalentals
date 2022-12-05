@@ -33,7 +33,8 @@
         <!-- <property name="current_session_context_class">thread</property> -->
 
         <!-- Drop and re-create the database schema on startup -->
-        <property name="hbm2ddl.auto">create-drop</property>
+        <property name="hbm2ddl.auto">create-drop</property> 
+        <!-- <property name="hbm2ddl.auto">update</property>  -->
 
         <!-- dbcp connection pool configuration -->
        <!--  <property name="hibernate.dbcp.initialSize">5</property>
@@ -45,7 +46,7 @@
         <!-- <mapping resource="hbm/Message.hbm.xml" /> -->
         <!-- <mapping class="com.example.hibernate.entity.Message"/>
         <mapping class="com.example.hibernate.entity.composition.Person"/> -->
-        <mapping class="com.example.hibernate.entity.association.Guide"/>
-        <mapping class="com.example.hibernate.entity.association.Student"/>
+        <mapping class="com.example.hibernate.entity.association.bidirectional.one_to_many.Guide"/>
+        <mapping class="com.example.hibernate.entity.association.bidirectional.many_to_one.Student"/>
     </session-factory>
 </hibernate-configuration>

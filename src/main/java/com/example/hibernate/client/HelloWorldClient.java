@@ -8,11 +8,12 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.example.hibernate.entity.Message;
-import com.example.hibernate.entity.association.Guide;
-import com.example.hibernate.entity.association.Student;
+import com.example.hibernate.entity.association.bidirectional.many_to_one.Student;
+import com.example.hibernate.entity.association.bidirectional.one_to_many.Guide;
 import com.example.hibernate.entity.composition.Address;
 import com.example.hibernate.entity.composition.Person;
 import com.example.hibernate.util.HibernateUtil;
+import com.mysql.cj.xdevapi.SessionImpl;
 
 
 
@@ -23,15 +24,55 @@ public class HelloWorldClient {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
-         Guide guide = new Guide("staff-1", "tarjan", 2000);
-         Student student = new Student("Jane", guide);
+         Guide guide_1 = new Guide("staff-1", "Guide-1", 2000);
+         Guide guide_2 = new Guide("staff-2", "Guide-2", 2500);
 
-         session.save(guide);
-         session.save(student);
+         Student student_1 = new Student("Student-1", guide_1);        
+         Student student_2 = new Student("Student-2", guide_1);
+
+         //session.save(guide);
+         //session.save(student);
+
+         guide_1.getStudents().add(student_1);
+         guide_1.getStudents().add(student_2);
+
+         session.persist(guide_1);
+         session.persist(guide_2);
+         //Student student = session.get(Student.class, 2L);
+         //session.delete(student); 
+
+
 
          session.getTransaction().commit();
-         session.close();
+
+         session.beginTransaction();
+
+         guide_2 = session.get(Guide.class, 2L);
+         student_2 = session.get(Student.class, 2L);
+         
+         //student_2.setGuide(guide_2);
+         //guide_2.setSalary(4000);
+         //guide_2.getStudents().add(student_2);
+         guide_2.addStudent(student_2);
+         //System.out.println(student_1.toString()); 
         
+
+         session.getTransaction().commit(); 
+
+
+         session.beginTransaction();
+
+         guide_1 = session.get(Guide.class, 1L);
+         System.out.println(guide_1.getStudents().size());
+
+         session.getTransaction().commit();
+
+
+         session.close();
+            
+         for (Student student : guide_1.getStudents()) {
+            System.out.println(student.getName());
+         }
         /* Message message = new Message("Hello world with hibernate");
 
         session.persist(message);
