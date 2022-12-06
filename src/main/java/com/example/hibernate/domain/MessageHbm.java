@@ -1,11 +1,11 @@
 package com.example.hibernate.domain;
 
-public class Message {
+public class MessageHbm {
     private long id;
     private String text;
 
-    public Message(){ }
-    public Message(String text){
+    public MessageHbm(){ }
+    public MessageHbm(String text){
         setText(text);
     }
     public long getId() {

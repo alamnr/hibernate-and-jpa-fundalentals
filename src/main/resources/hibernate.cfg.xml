@@ -48,5 +48,9 @@
         <mapping class="com.example.hibernate.entity.composition.Person"/> -->
         <mapping class="com.example.hibernate.entity.association.bidirectional.one_to_many.Guide"/>
         <mapping class="com.example.hibernate.entity.association.bidirectional.many_to_one.Student"/>
+        <mapping class="com.example.hibernate.entity.association.bidirectional.one_to_one.Customer"/>
+        <mapping class="com.example.hibernate.entity.association.bidirectional.one_to_one.Passport"/>
+        <mapping class="com.example.hibernate.entity.association.bidirectional.many_to_many.Movie"/>
+        <mapping class="com.example.hibernate.entity.association.bidirectional.many_to_many.Actor"/>
     </session-factory>
 </hibernate-configuration>

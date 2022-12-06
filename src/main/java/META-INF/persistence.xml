@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.1"
-    xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+    
     <persistence-unit name="hello-world" transaction-type="RESOURCE_LOCAL">
+
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+              
         <properties>
             <!-- Configuring The Database Connection Details -->
-            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bookstore" />
-            <property name="javax.persistence.jdbc.user" value="kuddus" />
-            <property name="javax.persistence.jdbc.password" value="p@ssw0rd" />          
+            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bookstore" />
+            <property name="jakarta.persistence.jdbc.user" value="kuddus" />
+            <property name="jakarta.persistence.jdbc.password" value="p@ssw0rd" />          
 
             <!-- SQL Dialect -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
             
             <!-- Create update tables automatically using mapping metadata -->
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
 
              <!-- Pretty print the sql in log -->
-            <property name="hibernate.format_sql" value="true"/>
+            <!-- <property name="hibernate.format_sql" value="true"/> -->
         </properties>
     </persistence-unit>
 </persistence>

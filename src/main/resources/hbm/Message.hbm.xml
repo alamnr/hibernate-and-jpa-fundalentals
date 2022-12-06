@@ -2,7 +2,7 @@
  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
  <hibernate-mapping package="com.example.hibernate.domain">
-    <class name="Message" table="message">
+    <class name="MessageHbm" table="message">
         <id name="id" column="id" type="long">
             <generator class="native"/>
         </id>

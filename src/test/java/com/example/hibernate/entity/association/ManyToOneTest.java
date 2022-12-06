@@ -13,7 +13,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.example.hibernate.domain.Message;
+import com.example.hibernate.domain.MessageJdbc;
 import com.example.hibernate.entity.association.bidirectional.many_to_one.Student;
 import com.example.hibernate.entity.association.bidirectional.one_to_many.Guide;
 import com.example.hibernate.util.HibernateUtil;
@@ -118,7 +118,7 @@ public class ManyToOneTest {
         EntityTransaction txn = em.getTransaction();
         try {
             txn.begin();
-            Message msg = new Message("Hello world with hibernate as JPA provider");
+            MessageJdbc msg = new MessageJdbc("Hello world with hibernate as JPA provider");
             em.persist(msg);
 
             txn.commit();

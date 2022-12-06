@@ -8,8 +8,12 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.example.hibernate.entity.Message;
+import com.example.hibernate.entity.association.bidirectional.many_to_many.Actor;
+import com.example.hibernate.entity.association.bidirectional.many_to_many.Movie;
 import com.example.hibernate.entity.association.bidirectional.many_to_one.Student;
 import com.example.hibernate.entity.association.bidirectional.one_to_many.Guide;
+import com.example.hibernate.entity.association.bidirectional.one_to_one.Customer;
+import com.example.hibernate.entity.association.bidirectional.one_to_one.Passport;
 import com.example.hibernate.entity.composition.Address;
 import com.example.hibernate.entity.composition.Person;
 import com.example.hibernate.util.HibernateUtil;
@@ -67,12 +71,40 @@ public class HelloWorldClient {
 
          session.getTransaction().commit();
 
-
-         session.close();
-            
          for (Student student : guide_1.getStudents()) {
             System.out.println(student.getName());
          }
+
+         session.beginTransaction();
+
+         Passport passport = new Passport("925076473");
+         Customer customer = new Customer("Jhantu", passport);
+
+         session.persist(customer);
+
+         session.getTransaction().commit();
+
+         session.beginTransaction();
+
+         Movie movie_1 = new Movie("Tarzan");
+         Movie movie_2 = new Movie("Oh! Yes");
+
+         Actor actor_1 = new Actor("Tim");
+         Actor actor_2 = new Actor("Jane");
+
+         movie_1.getActors().add(actor_1);
+         movie_2.getActors().add(actor_2);
+
+         movie_2.getActors().add(actor_1);
+
+         session.persist(movie_1);
+         session.persist(movie_2);
+
+         session.getTransaction().commit();
+
+         session.close();
+            
+         
         /* Message message = new Message("Hello world with hibernate");
 
         session.persist(message);
